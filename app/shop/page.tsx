@@ -3,6 +3,11 @@ import Link from "next/link";
 import { getAllProducts } from "@/lib/wix/products";
 import { ProductGrid } from "@/components/collection/ProductGrid";
 import { SHOP_BY_MESSAGE } from "@/types/wix";
+import {
+  filterProductsByCategory,
+  parseProductCategory,
+  PRODUCT_CATEGORIES,
+} from "@/lib/catalog/product-categories";
 import type { WixProduct } from "@/types/wix";
 
 export const metadata: Metadata = {
@@ -11,13 +16,20 @@ export const metadata: Metadata = {
     "Browse the full G.E.A.R. collection — faith-driven apparel built around Scripture and meaning.",
 };
 
-export default async function ShopPage() {
+export default async function ShopPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category: requestedCategory } = await searchParams;
+  const category = parseProductCategory(requestedCategory);
   let products: WixProduct[] = [];
   try {
     products = await getAllProducts();
   } catch {
     products = [];
   }
+  const filteredProducts = filterProductsByCategory(products, category);
 
   return (
     <div className="container-content py-12">
@@ -42,30 +54,37 @@ export default async function ShopPage() {
           </div>
           <div>
             <p className="border-b border-line pb-3 text-sm font-semibold uppercase tracking-wide">
-              Shop by Fit
+              Category
             </p>
             <ul className="mt-4 space-y-2 text-sm">
-              <li>
-                <Link href="/men" className="text-ink/70 hover:text-gold">
-                  Men
-                </Link>
-              </li>
-              <li>
-                <Link href="/women" className="text-ink/70 hover:text-gold">
-                  Women
-                </Link>
-              </li>
+              {PRODUCT_CATEGORIES.map((item) => (
+                <li key={item.value}>
+                  <Link
+                    href={item.value === "all" ? "/shop" : `/shop?category=${item.value}`}
+                    aria-current={category === item.value ? "page" : undefined}
+                    className={
+                      category === item.value
+                        ? "font-semibold text-gold"
+                        : "text-ink/70 hover:text-gold"
+                    }
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </aside>
 
         <div>
           <div className="flex items-center justify-between border-b border-line pb-4 text-sm">
-            <p className="text-ink/60">{products.length} products</p>
+            <p className="text-ink/60">
+              {filteredProducts.length} {category === "all" ? "products" : `${category} products`}
+            </p>
           </div>
           <div className="mt-8">
             <ProductGrid
-              products={products}
+              products={filteredProducts}
               emptyMessage="Unable to load products right now. Check the Wix Headless connection."
             />
           </div>

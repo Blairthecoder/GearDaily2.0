@@ -123,8 +123,8 @@ export default async function HomePage() {
 
       <section className="container-content grid gap-6 pb-16 sm:grid-cols-2">
         {[
-          { label: "Shop Men", href: "/men", product: products[4] },
-          { label: "Shop Women", href: "/women", product: products[5] },
+          { label: "Shop Men", href: "/shop?category=men", product: products[4] },
+          { label: "Shop Women", href: "/shop?category=women", product: products[5] },
         ].map((tile) => {
           const image = getProductImage(tile.product);
           return (

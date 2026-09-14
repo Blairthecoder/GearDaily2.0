@@ -4,8 +4,8 @@ import { getProductImage } from "@/lib/catalog/product-images";
 import type { WixProduct } from "@/types/wix";
 
 const TILES = [
-  { label: "Shop Men", sub: "New drops", href: "/men" },
-  { label: "Shop Women", sub: "New drops", href: "/women" },
+  { label: "Shop Men", sub: "New drops", href: "/shop?category=men" },
+  { label: "Shop Women", sub: "New drops", href: "/shop?category=women" },
   { label: "New Arrivals", sub: "Just landed", href: "/new-arrivals" },
 ];
 
