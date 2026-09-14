@@ -10,8 +10,10 @@ const config: Config = {
         paper: "#F7F5F1",
         canvas: "#EFEBE3",
         brass: "#A9895C",
+        gold: "#C69645",
         rust: "#8C3B2E",
         forest: "#374A3E",
+        mist: "#DCEAE8",
         line: "#D9D3C7",
       },
       fontFamily: {

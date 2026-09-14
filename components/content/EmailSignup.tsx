@@ -1,13 +1,17 @@
 export function EmailSignup() {
   return (
-    <section className="bg-forest py-16 text-paper">
-      <div className="container-content text-center">
-        <h2 className="font-display text-2xl">Get New Releases & Design Stories First</h2>
-        <p className="mx-auto mt-2 max-w-md text-paper/80">
-          Early access to drops, the meaning behind each design, and a little
-          encouragement along the way.
-        </p>
-        <form className="mx-auto mt-6 flex max-w-md gap-2">
+    <section className="bg-mist py-14 text-ink">
+      <div className="container-content flex flex-col items-center justify-between gap-6 text-center lg:flex-row lg:text-left">
+        <div>
+          <h2 className="font-display text-2xl">
+            Get New Releases & Design Stories First
+          </h2>
+          <p className="mt-2 max-w-md text-ink/70">
+            Early access to drops, the meaning behind each design, and a little
+            encouragement along the way.
+          </p>
+        </div>
+        <form className="flex w-full max-w-md gap-2">
           <label htmlFor="email-signup" className="sr-only">
             Email address
           </label>
@@ -15,14 +19,11 @@ export function EmailSignup() {
             id="email-signup"
             type="email"
             required
-            placeholder="you@example.com"
-            className="w-full border border-paper/30 bg-transparent px-4 py-3 text-sm placeholder:text-paper/50"
+            placeholder="Enter your email"
+            className="w-full border border-ink/20 bg-paper px-4 py-3 text-sm placeholder:text-ink/40"
           />
-          <button
-            type="submit"
-            className="whitespace-nowrap bg-paper px-5 py-3 text-sm font-medium text-ink hover:bg-brass"
-          >
-            Sign Up
+          <button type="submit" className="btn-solid whitespace-nowrap">
+            Subscribe
           </button>
         </form>
       </div>

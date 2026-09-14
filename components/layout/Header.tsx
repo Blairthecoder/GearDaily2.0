@@ -19,68 +19,93 @@ export function Header() {
   const { itemCount, openDrawer } = useCart();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
-      <div className="container-content flex h-16 items-center justify-between">
-        <button
-          type="button"
-          className="p-2 -ml-2 lg:hidden"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((v) => !v)}
-        >
-          <span className="block h-0.5 w-6 bg-ink mb-1.5" />
-          <span className="block h-0.5 w-6 bg-ink mb-1.5" />
-          <span className="block h-0.5 w-6 bg-ink" />
-        </button>
-
-        <Link href="/" className="font-display text-xl tracking-wide">
-          G.E.A.R.
-        </Link>
-
-        <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
-          {PRIMARY_NAV.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-rust">
-              {item.label}
+    <header className="sticky top-0 z-40 bg-paper">
+      <div className="hidden border-b border-line bg-ink text-paper/80 lg:block">
+        <div className="container-content flex h-9 items-center justify-between text-xs">
+          <p className="uppercase tracking-wide">
+            Free shipping on U.S. orders over $75
+          </p>
+          <div className="flex items-center gap-6">
+            <Link href="/geared-4-gain" className="hover:text-gold">
+              G.E.A.R.ed 4 Gain
             </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <Link href="/search" aria-label="Search" className="p-2">
-            <SearchIcon />
-          </Link>
-          <button
-            type="button"
-            aria-label={`Cart, ${itemCount} items`}
-            onClick={openDrawer}
-            className="relative p-2"
-          >
-            <CartIcon />
-            {itemCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-rust text-[10px] text-paper">
-                {itemCount}
-              </span>
-            )}
-          </button>
+            <Link href="/faq" className="hover:text-gold">
+              FAQ
+            </Link>
+            <Link href="/contact" className="hover:text-gold">
+              Contact
+            </Link>
+          </div>
         </div>
       </div>
 
-      {menuOpen && (
-        <nav
-          id="mobile-nav"
-          className="lg:hidden border-t border-line bg-paper px-4 py-4"
-        >
-          <ul className="flex flex-col gap-4 text-base">
+      <div className="border-b border-line bg-paper/95 backdrop-blur">
+        <div className="container-content flex h-16 items-center justify-between lg:h-20">
+          <button
+            type="button"
+            className="p-2 -ml-2 lg:hidden"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <span className="block h-0.5 w-6 bg-ink mb-1.5" />
+            <span className="block h-0.5 w-6 bg-ink mb-1.5" />
+            <span className="block h-0.5 w-6 bg-ink" />
+          </button>
+
+          <Link href="/" className="font-display text-2xl tracking-wide">
+            G<span className="text-gold">.</span>E.A.R.
+          </Link>
+
+          <nav className="hidden lg:flex items-center gap-8 text-xs font-semibold uppercase tracking-wide">
             {PRIMARY_NAV.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} onClick={() => setMenuOpen(false)}>
-                  {item.label}
-                </Link>
-              </li>
+              <Link
+                key={item.href}
+                href={item.href}
+                className="border-b-2 border-transparent pb-1 transition-colors hover:border-gold hover:text-gold"
+              >
+                {item.label}
+              </Link>
             ))}
-          </ul>
-        </nav>
-      )}
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <Link href="/search" aria-label="Search" className="p-2">
+              <SearchIcon />
+            </Link>
+            <button
+              type="button"
+              aria-label={`Cart, ${itemCount} items`}
+              onClick={openDrawer}
+              className="relative p-2"
+            >
+              <CartIcon />
+              {itemCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-gold text-[10px] font-semibold text-ink">
+                  {itemCount}
+                </span>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {menuOpen && (
+          <nav
+            id="mobile-nav"
+            className="lg:hidden border-t border-line bg-paper px-4 py-4"
+          >
+            <ul className="flex flex-col gap-4 text-sm font-semibold uppercase tracking-wide">
+              {PRIMARY_NAV.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} onClick={() => setMenuOpen(false)}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+      </div>
     </header>
   );
 }

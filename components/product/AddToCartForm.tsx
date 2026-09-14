@@ -32,7 +32,7 @@ export function AddToCartForm({ product }: { product: WixProduct }) {
         type="button"
         onClick={handleAddToCart}
         disabled={!inStock || isPending}
-        className="w-full bg-ink py-4 text-sm font-medium text-paper hover:bg-rust disabled:cursor-not-allowed disabled:bg-ink/30"
+        className="btn-solid w-full disabled:cursor-not-allowed disabled:bg-ink/30 disabled:text-paper disabled:hover:bg-ink/30"
       >
         {!inStock ? "Out of Stock" : isPending ? "Adding..." : "Add to Cart"}
       </button>

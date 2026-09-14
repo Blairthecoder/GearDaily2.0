@@ -25,3 +25,19 @@ body {
 .container-content {
   @apply mx-auto max-w-content px-4 sm:px-6 lg:px-10;
 }
+
+.btn-solid {
+  @apply inline-block bg-ink px-6 py-3 text-sm font-medium uppercase tracking-wide text-paper transition-colors hover:bg-gold hover:text-ink;
+}
+
+.btn-outline {
+  @apply inline-block border border-ink px-6 py-3 text-sm font-medium uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-paper;
+}
+
+.badge-sale {
+  @apply absolute left-3 top-3 z-10 bg-rust px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-paper;
+}
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.2em] text-gold;
+}

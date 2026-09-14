@@ -4,6 +4,9 @@ import { ProductGrid } from "@/components/collection/ProductGrid";
 import { ShopByMessage } from "@/components/content/ShopByMessage";
 import { FeaturedDesignStory } from "@/components/content/FeaturedDesignStory";
 import { EmailSignup } from "@/components/content/EmailSignup";
+import { PromoTiles } from "@/components/content/PromoTiles";
+import { FeatureStrip } from "@/components/content/FeatureStrip";
+import { MiniColumns } from "@/components/content/MiniColumns";
 import { DESIGN_STORIES } from "@/lib/content/behind-the-design";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/jsonld";
@@ -26,7 +29,8 @@ export default async function HomePage() {
 
       <section className="container-content grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:py-24">
         <div>
-          <h1 className="font-display text-4xl leading-tight lg:text-6xl">
+          <p className="eyebrow">New Collection</p>
+          <h1 className="mt-2 font-display text-4xl leading-tight lg:text-6xl">
             Faith, Worn Daily.
           </h1>
           <p className="mt-4 max-w-md text-lg text-ink/70">
@@ -34,16 +38,10 @@ export default async function HomePage() {
             start conversations. Every design carries a message.
           </p>
           <div className="mt-8 flex gap-4">
-            <Link
-              href="/shop"
-              className="bg-ink px-6 py-3 text-sm font-medium text-paper hover:bg-rust"
-            >
+            <Link href="/shop" className="btn-solid">
               Shop the Collection
             </Link>
-            <Link
-              href="/about"
-              className="border border-ink px-6 py-3 text-sm font-medium hover:bg-canvas"
-            >
+            <Link href="/about" className="btn-outline">
               Discover G.E.A.R.
             </Link>
           </div>
@@ -51,10 +49,17 @@ export default async function HomePage() {
         <div className="aspect-[4/5] bg-canvas" aria-hidden="true" />
       </section>
 
-      <section className="container-content py-12">
+      <PromoTiles />
+
+      <FeatureStrip />
+
+      <section className="container-content py-16">
         <div className="flex items-baseline justify-between">
-          <h2 className="font-display text-2xl">New Arrivals</h2>
-          <Link href="/new-arrivals" className="text-sm underline">
+          <div>
+            <p className="eyebrow">Just Landed</p>
+            <h2 className="font-display text-2xl">New Arrivals</h2>
+          </div>
+          <Link href="/new-arrivals" className="text-sm font-semibold uppercase tracking-wide hover:text-gold">
             View all
           </Link>
         </div>
@@ -70,25 +75,39 @@ export default async function HomePage() {
 
       {featuredStory && <FeaturedDesignStory story={featuredStory} />}
 
-      <section className="container-content py-12">
-        <h2 className="font-display text-2xl">Best Sellers</h2>
+      <section className="border-y border-line bg-canvas py-16">
+        <div className="container-content max-w-2xl text-center">
+          <p className="eyebrow">G.E.A.R.ed 4 Gain</p>
+          <h2 className="mt-2 font-display text-2xl">Every Design Has a Message</h2>
+          <p className="mt-3 text-ink/70">
+            Every piece is built around Scripture, biblical character, and
+            spiritual growth — clothing meant to start conversations about
+            what you believe. A portion of what we do goes toward clothing
+            and supporting individuals experiencing homelessness, school-aged
+            children, and local communities.
+          </p>
+          <Link href="/geared-4-gain" className="btn-outline mt-6 inline-block">
+            Learn About Our Impact
+          </Link>
+        </div>
+      </section>
+
+      <section className="container-content py-16">
+        <div className="flex items-baseline justify-between">
+          <div>
+            <p className="eyebrow">Fan Favorites</p>
+            <h2 className="font-display text-2xl">Best Sellers</h2>
+          </div>
+          <Link href="/best-sellers" className="text-sm font-semibold uppercase tracking-wide hover:text-gold">
+            View all
+          </Link>
+        </div>
         <div className="mt-8">
           <ProductGrid products={products.slice(0, 4)} />
         </div>
       </section>
 
-      <section className="border-y border-line bg-canvas py-16">
-        <div className="container-content max-w-2xl text-center">
-          <h2 className="font-display text-2xl">Every Design Has a Message</h2>
-          <p className="mt-3 text-ink/70">
-            Every piece is built around Scripture, biblical character, and
-            spiritual growth — clothing meant to start conversations about
-            what you believe.
-          </p>
-        </div>
-      </section>
-
-      <section className="container-content grid gap-6 py-16 sm:grid-cols-2">
+      <section className="container-content grid gap-6 pb-16 sm:grid-cols-2">
         <Link href="/men" className="group relative aspect-[3/4] bg-canvas">
           <span className="absolute bottom-6 left-6 font-display text-2xl text-ink">
             Shop Men
@@ -101,34 +120,9 @@ export default async function HomePage() {
         </Link>
       </section>
 
-      <section className="container-content py-16">
-        <h2 className="font-display text-2xl">Behind the Design</h2>
-        <div className="mt-8 grid gap-8 sm:grid-cols-3">
-          {DESIGN_STORIES.slice(0, 3).map((story) => (
-            <Link key={story.slug} href={`/behind-the-design/${story.slug}`} className="group">
-              <div className="aspect-[4/5] bg-canvas" />
-              <p className="mt-3 text-sm font-semibold uppercase tracking-wide text-brass">
-                {story.scriptureRef}
-              </p>
-              <h3 className="font-display text-lg">{story.title}</h3>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="container-content py-16">
-        <div className="border border-line p-8 text-center">
-          <h2 className="font-display text-2xl">G.E.A.R.ed 4 Gain</h2>
-          <p className="mx-auto mt-3 max-w-xl text-ink/70">
-            A portion of what we do goes toward clothing and supporting
-            individuals experiencing homelessness, school-aged children, and
-            local communities.
-          </p>
-          <Link href="/geared-4-gain" className="mt-4 inline-block underline text-sm">
-            Learn about our impact
-          </Link>
-        </div>
-      </section>
+      <div className="border-t border-line">
+        <MiniColumns products={products} />
+      </div>
 
       <EmailSignup />
     </>

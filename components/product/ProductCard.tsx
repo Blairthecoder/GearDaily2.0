@@ -11,6 +11,7 @@ export function ProductCard({ product }: { product: WixProduct }) {
   return (
     <Link href={`/products/${product.slug}`} className="group block">
       <div className="relative aspect-[4/5] overflow-hidden bg-canvas">
+        {onSale && <span className="badge-sale">Sale</span>}
         {image?.url ? (
           <Image
             src={image.url}
