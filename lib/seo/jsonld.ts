@@ -1,4 +1,5 @@
 import type { WixProduct } from "@/types/wix";
+import { getProductImage } from "@/lib/catalog/product-images";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -22,7 +23,7 @@ export function websiteJsonLd() {
 }
 
 export function productJsonLd(product: WixProduct) {
-  const image = product.media?.mainMedia?.image?.url;
+  const image = getProductImage(product)?.url;
   return {
     "@context": "https://schema.org",
     "@type": "Product",

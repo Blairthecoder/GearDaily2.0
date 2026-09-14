@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DESIGN_STORIES, getDesignStoryBySlug } from "@/lib/content/behind-the-design";
@@ -16,7 +17,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const story = getDesignStoryBySlug(slug);
   if (!story) return {};
-  return { title: story.title, description: story.summary };
+  return {
+    title: story.title,
+    description: story.summary,
+    openGraph: {
+      images: story.heroImage ? [story.heroImage] : undefined,
+    },
+  };
 }
 
 export default async function DesignStoryPage({
@@ -36,13 +43,25 @@ export default async function DesignStoryPage({
           "@type": "Article",
           headline: story.title,
           description: story.summary,
+          image: story.heroImage,
         }}
       />
       <p className="text-sm font-semibold uppercase tracking-wide text-brass">
         {story.scriptureRef}
       </p>
       <h1 className="mt-2 font-display text-4xl">{story.title}</h1>
-      <div className="mt-6 aspect-[16/9] bg-canvas" />
+      <div className="relative mt-6 aspect-[16/9] overflow-hidden bg-canvas">
+        {story.heroImage && (
+          <Image
+            src={story.heroImage}
+            alt={story.title}
+            fill
+            sizes="(min-width: 768px) 768px, 100vw"
+            className="object-cover"
+            priority
+          />
+        )}
+      </div>
 
       <div className="mt-8 space-y-8">
         <div>

@@ -9,6 +9,7 @@ import { PromoTiles } from "@/components/content/PromoTiles";
 import { FeatureStrip } from "@/components/content/FeatureStrip";
 import { MiniColumns } from "@/components/content/MiniColumns";
 import { DESIGN_STORIES } from "@/lib/content/behind-the-design";
+import { getProductImage } from "@/lib/catalog/product-images";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/jsonld";
 import type { WixProduct } from "@/types/wix";
@@ -22,6 +23,7 @@ export default async function HomePage() {
   }
 
   const featuredStory = DESIGN_STORIES[0];
+  const heroImage = getProductImage(products[0]);
 
   return (
     <>
@@ -48,10 +50,10 @@ export default async function HomePage() {
           </div>
         </div>
         <div className="relative aspect-[4/5] bg-canvas">
-          {products[0]?.media?.mainMedia?.image?.url && (
+          {heroImage && (
             <Image
-              src={products[0].media.mainMedia.image.url}
-              alt={products[0].media.mainMedia.image.altText || products[0].name || ""}
+              src={heroImage.url}
+              alt={heroImage.altText}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               priority
@@ -124,7 +126,7 @@ export default async function HomePage() {
           { label: "Shop Men", href: "/men", product: products[4] },
           { label: "Shop Women", href: "/women", product: products[5] },
         ].map((tile) => {
-          const image = tile.product?.media?.mainMedia?.image;
+          const image = getProductImage(tile.product);
           return (
             <Link key={tile.href} href={tile.href} className="group relative aspect-[3/4] overflow-hidden bg-canvas">
               {image?.url && (

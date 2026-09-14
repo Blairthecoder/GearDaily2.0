@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getProductImage } from "@/lib/catalog/product-images";
 import type { WixProduct } from "@/types/wix";
 
 function MiniList({ title, products }: { title: string; products: WixProduct[] }) {
@@ -8,7 +9,7 @@ function MiniList({ title, products }: { title: string; products: WixProduct[] }
       <p className="eyebrow border-b border-line pb-3">{title}</p>
       <ul className="mt-4 space-y-4">
         {products.slice(0, 2).map((product) => {
-          const image = product.media?.mainMedia?.image;
+          const image = getProductImage(product);
           return (
           <li key={product._id}>
             <Link href={`/products/${product.slug}`} className="flex items-center gap-3 group">

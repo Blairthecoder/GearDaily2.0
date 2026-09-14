@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getProductImage } from "@/lib/catalog/product-images";
 import type { WixProduct } from "@/types/wix";
 
 const TILES = [
@@ -12,7 +13,7 @@ export function PromoTiles({ products = [] }: { products?: WixProduct[] }) {
   return (
     <section className="container-content grid gap-4 py-10 sm:grid-cols-3">
       {TILES.map((tile, i) => {
-        const image = products[i]?.media?.mainMedia?.image;
+        const image = getProductImage(products[i]);
         return (
           <Link
             key={tile.href}

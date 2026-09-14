@@ -6,6 +6,7 @@ import { getDesignStoryBySlug } from "@/lib/content/behind-the-design";
 import { AddToCartForm } from "@/components/product/AddToCartForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo/jsonld";
+import { getProductImage } from "@/lib/catalog/product-images";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -16,13 +17,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = await getProductBySlug(slug).catch(() => null);
   if (!product) return {};
+  const image = getProductImage(product);
   return {
     title: product.name,
     description: product.description?.slice(0, 155),
     openGraph: {
-      images: product.media?.mainMedia?.image?.url
-        ? [product.media.mainMedia.image.url]
-        : undefined,
+      images: image ? [image.url] : undefined,
     },
   };
 }
@@ -37,7 +37,7 @@ export default async function ProductPage({
   if (!product) notFound();
 
   const story = product.ribbon ? getDesignStoryBySlug(product.ribbon) : null;
-  const image = product.media?.mainMedia?.image;
+  const image = getProductImage(product);
 
   return (
     <div className="container-content py-8">

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getProductImage } from "@/lib/catalog/product-images";
 import { getAllProducts } from "@/lib/wix/products";
 import type { WixProduct } from "@/types/wix";
 
@@ -45,7 +46,7 @@ export async function Footer() {
     <footer className="border-t border-line bg-ink text-paper">
       <div className="container-content grid grid-cols-2 gap-2 border-b border-paper/10 py-6 sm:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => {
-          const image = products[i]?.media?.mainMedia?.image;
+          const image = getProductImage(products[i]);
           return (
             <Link
               key={products[i]?._id ?? i}

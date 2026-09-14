@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getProductImage } from "@/lib/catalog/product-images";
 import type { WixProduct } from "@/types/wix";
 
 export function ProductCard({ product }: { product: WixProduct }) {
-  const image = product.media?.mainMedia?.image;
+  const image = getProductImage(product);
   const price = product.priceData?.formatted?.price;
   const salePrice = product.priceData?.formatted?.discountedPrice;
   const onSale = salePrice && salePrice !== price;
