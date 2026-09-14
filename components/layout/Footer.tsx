@@ -1,4 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
+import { getAllProducts } from "@/lib/wix/products";
+import type { WixProduct } from "@/types/wix";
 
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -30,20 +33,37 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
 
 const PAYMENT_METHODS = ["Visa", "Mastercard", "Amex", "Discover"];
 
-export function Footer() {
+export async function Footer() {
+  let products: WixProduct[] = [];
+  try {
+    products = await getAllProducts(4);
+  } catch {
+    products = [];
+  }
+
   return (
     <footer className="border-t border-line bg-ink text-paper">
-      <div className="container-content grid gap-6 border-b border-paper/10 py-6 sm:grid-cols-4 sm:gap-2">
-        {["Behind the Design", "Best Sellers", "New Arrivals", "Shop by Message"].map(
-          (label, i) => (
-            <div
-              key={label}
-              className="aspect-square bg-paper/5"
-              style={{ opacity: 0.6 + i * 0.1 }}
-              aria-hidden="true"
-            />
-          ),
-        )}
+      <div className="container-content grid grid-cols-2 gap-2 border-b border-paper/10 py-6 sm:grid-cols-4">
+        {Array.from({ length: 4 }).map((_, i) => {
+          const image = products[i]?.media?.mainMedia?.image;
+          return (
+            <Link
+              key={products[i]?._id ?? i}
+              href={products[i]?.slug ? `/products/${products[i]!.slug}` : "/shop"}
+              className="relative aspect-square overflow-hidden bg-paper/5"
+            >
+              {image?.url ? (
+                <Image
+                  src={image.url}
+                  alt=""
+                  fill
+                  sizes="25vw"
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                />
+              ) : null}
+            </Link>
+          );
+        })}
       </div>
 
       <div className="container-content py-12 grid grid-cols-2 gap-8 lg:grid-cols-5">

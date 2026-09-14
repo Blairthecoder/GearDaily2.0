@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getAllProducts } from "@/lib/wix/products";
 import { ProductGrid } from "@/components/collection/ProductGrid";
@@ -46,10 +47,21 @@ export default async function HomePage() {
             </Link>
           </div>
         </div>
-        <div className="aspect-[4/5] bg-canvas" aria-hidden="true" />
+        <div className="relative aspect-[4/5] bg-canvas">
+          {products[0]?.media?.mainMedia?.image?.url && (
+            <Image
+              src={products[0].media.mainMedia.image.url}
+              alt={products[0].media.mainMedia.image.altText || products[0].name || ""}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              priority
+              className="object-cover"
+            />
+          )}
+        </div>
       </section>
 
-      <PromoTiles />
+      <PromoTiles products={products.slice(1, 4)} />
 
       <FeatureStrip />
 
@@ -108,16 +120,33 @@ export default async function HomePage() {
       </section>
 
       <section className="container-content grid gap-6 pb-16 sm:grid-cols-2">
-        <Link href="/men" className="group relative aspect-[3/4] bg-canvas">
-          <span className="absolute bottom-6 left-6 font-display text-2xl text-ink">
-            Shop Men
-          </span>
-        </Link>
-        <Link href="/women" className="group relative aspect-[3/4] bg-canvas">
-          <span className="absolute bottom-6 left-6 font-display text-2xl text-ink">
-            Shop Women
-          </span>
-        </Link>
+        {[
+          { label: "Shop Men", href: "/men", product: products[4] },
+          { label: "Shop Women", href: "/women", product: products[5] },
+        ].map((tile) => {
+          const image = tile.product?.media?.mainMedia?.image;
+          return (
+            <Link key={tile.href} href={tile.href} className="group relative aspect-[3/4] overflow-hidden bg-canvas">
+              {image?.url && (
+                <>
+                  <Image
+                    src={image.url}
+                    alt=""
+                    fill
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/0 to-transparent" />
+                </>
+              )}
+              <span
+                className={`absolute bottom-6 left-6 font-display text-2xl ${image?.url ? "text-paper" : "text-ink"}`}
+              >
+                {tile.label}
+              </span>
+            </Link>
+          );
+        })}
       </section>
 
       <div className="border-t border-line">

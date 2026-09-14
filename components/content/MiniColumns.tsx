@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { WixProduct } from "@/types/wix";
 
@@ -6,10 +7,16 @@ function MiniList({ title, products }: { title: string; products: WixProduct[] }
     <div>
       <p className="eyebrow border-b border-line pb-3">{title}</p>
       <ul className="mt-4 space-y-4">
-        {products.slice(0, 2).map((product) => (
+        {products.slice(0, 2).map((product) => {
+          const image = product.media?.mainMedia?.image;
+          return (
           <li key={product._id}>
             <Link href={`/products/${product.slug}`} className="flex items-center gap-3 group">
-              <div className="h-16 w-14 flex-shrink-0 bg-canvas" aria-hidden="true" />
+              <div className="relative h-16 w-14 flex-shrink-0 overflow-hidden bg-canvas">
+                {image?.url && (
+                  <Image src={image.url} alt="" fill sizes="56px" className="object-cover" />
+                )}
+              </div>
               <div>
                 <p className="text-sm font-medium group-hover:text-gold">{product.name}</p>
                 <p className="mt-1 text-sm text-ink/60">
@@ -18,7 +25,8 @@ function MiniList({ title, products }: { title: string; products: WixProduct[] }
               </div>
             </Link>
           </li>
-        ))}
+          );
+        })}
         {products.length === 0 && (
           <li className="text-sm text-ink/40">Coming soon</li>
         )}
