@@ -4,6 +4,9 @@ export const PRODUCT_CATEGORIES = [
   { label: "All", value: "all" },
   { label: "Men", value: "men" },
   { label: "Women", value: "women" },
+  { label: "Hats", value: "hats" },
+  { label: "Bottoms", value: "bottoms" },
+  { label: "Tops", value: "tops" },
 ] as const;
 
 export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number]["value"];
@@ -31,6 +34,16 @@ export function filterProductsByCategory(
     const name = normalizeName(product.name);
 
     if (category === "men") return !WOMEN_ONLY_PRODUCTS.has(name);
-    return !MEN_ONLY_PRODUCTS.has(name);
+    if (category === "women") return !MEN_ONLY_PRODUCTS.has(name);
+    if (category === "hats") return name.includes("hat");
+    if (category === "bottoms") {
+      return name.includes("sweatpants") || name.includes("sweat pants");
+    }
+
+    return (
+      !name.includes("hat") &&
+      !name.includes("sweatpants") &&
+      !name.includes("sweat pants")
+    );
   });
 }

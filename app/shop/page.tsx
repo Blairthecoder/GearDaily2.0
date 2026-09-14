@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllProducts } from "@/lib/wix/products";
 import { ProductGrid } from "@/components/collection/ProductGrid";
-import { SHOP_BY_MESSAGE } from "@/types/wix";
 import {
   filterProductsByCategory,
   parseProductCategory,
@@ -38,20 +37,6 @@ export default async function ShopPage({
 
       <div className="mt-8 grid gap-10 lg:grid-cols-[220px_1fr]">
         <aside className="space-y-8">
-          <div>
-            <p className="border-b border-line pb-3 text-sm font-semibold uppercase tracking-wide">
-              Shop by Message
-            </p>
-            <ul className="mt-4 space-y-2 text-sm">
-              {SHOP_BY_MESSAGE.map((item) => (
-                <li key={item.slug}>
-                  <Link href={`/collections/${item.slug}`} className="text-ink/70 hover:text-gold">
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
           <div>
             <p className="border-b border-line pb-3 text-sm font-semibold uppercase tracking-wide">
               Category

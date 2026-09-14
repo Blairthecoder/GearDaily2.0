@@ -7,7 +7,6 @@ import { useCart } from "@/lib/cart-context";
 const PRIMARY_NAV = [
   { label: "Shop", href: "/shop" },
   { label: "New Arrivals", href: "/new-arrivals" },
-  { label: "Shop by Message", href: "/collections" },
   { label: "Behind the Design", href: "/behind-the-design" },
   { label: "Our Story", href: "/about" },
 ];
