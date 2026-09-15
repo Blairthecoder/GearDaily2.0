@@ -32,6 +32,16 @@ export default async function HomePage() {
     products = [];
   }
 
+  let catalogProducts: WixProduct[] = products;
+  try {
+    catalogProducts = await getAllProducts(100);
+  } catch {
+    catalogProducts = products;
+  }
+
+  const findByName = (name: string) =>
+    catalogProducts.find((p) => p.name?.trim().toLowerCase() === name);
+
   const featuredStory = DESIGN_STORIES[0];
   const heroProduct = products[0];
   const heroImage = getProductImage(heroProduct);
@@ -192,8 +202,16 @@ export default async function HomePage() {
 
       <section className="container-content grid gap-6 py-12 sm:grid-cols-2">
         {[
-          { label: "Shop Men", href: "/shop?category=men", product: products[4] },
-          { label: "Shop Women", href: "/shop?category=women", product: products[5] },
+          {
+            label: "Shop Men",
+            href: "/shop?category=men",
+            product: findByName("traits of man") ?? products[4],
+          },
+          {
+            label: "Shop Women",
+            href: "/shop?category=women",
+            product: findByName("womens blessings") ?? products[5],
+          },
         ].map((tile) => {
           const image = getProductImage(tile.product);
           return (
