@@ -52,7 +52,11 @@ export function Header() {
 
           <Link href="/" className="flex flex-col items-center leading-none">
             <span className="font-display text-2xl tracking-wide">
-              G<span className="text-gold">.</span>E.A.R.
+              G<sup className="text-[0.5em] text-gold">7</sup>
+              <span className="text-gold">.</span>E<sup className="text-[0.5em] text-gold">5</sup>
+              <span className="text-gold">.</span>A<sup className="text-[0.5em] text-gold">1</sup>
+              <span className="text-gold">.</span>R<sup className="text-[0.5em] text-gold">18</sup>
+              <span className="text-gold">.</span>
             </span>
             <span className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.15em] text-ink/50">
               Get Edified And Refreshed
