@@ -4,6 +4,8 @@ import { getProductImage } from "@/lib/catalog/product-images";
 import { getAllProducts } from "@/lib/wix/products";
 import type { WixProduct } from "@/types/wix";
 
+const BLOG_URL = process.env.NEXT_PUBLIC_BLOG_URL ?? "https://www.geardaily.com/blog";
+
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Shop",
@@ -20,6 +22,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Our Story", href: "/about" },
       { label: "Behind the Design", href: "/behind-the-design" },
       { label: "G.E.A.R.ed 4 Gain", href: "/geared-4-gain" },
+      { label: "Blog", href: BLOG_URL },
     ],
   },
   {

@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@wix/crm": "^1.0.1634",
     "@wix/ecom": "^1.0.734",
     "@wix/redirects": "^1.0.35",
     "@wix/sdk": "^1.13.0",
