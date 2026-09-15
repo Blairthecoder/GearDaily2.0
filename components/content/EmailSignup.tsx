@@ -81,7 +81,7 @@ export function EmailSignup({
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="btn-solid whitespace-nowrap bg-gold text-ink hover:bg-paper disabled:opacity-60"
+                className="btn-solid whitespace-nowrap border border-paper bg-paper text-ink hover:bg-ink hover:text-paper disabled:opacity-60"
               >
                 {status === "submitting" ? "Subscribing…" : "Subscribe"}
               </button>
