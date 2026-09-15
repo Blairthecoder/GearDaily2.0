@@ -50,8 +50,13 @@ export function Header() {
             <span className="block h-0.5 w-6 bg-ink" />
           </button>
 
-          <Link href="/" className="font-display text-2xl tracking-wide">
-            G<span className="text-gold">.</span>E.A.R.
+          <Link href="/" className="flex flex-col items-center leading-none">
+            <span className="font-display text-2xl tracking-wide">
+              G<span className="text-gold">.</span>E.A.R.
+            </span>
+            <span className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.15em] text-ink/50">
+              Get Edified And Refreshed
+            </span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8 text-xs font-semibold uppercase tracking-wide">
