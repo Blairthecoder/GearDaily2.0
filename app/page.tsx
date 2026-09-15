@@ -39,8 +39,12 @@ export default async function HomePage() {
     catalogProducts = products;
   }
 
-  const findByName = (name: string) =>
-    catalogProducts.find((p) => p.name?.trim().toLowerCase() === name);
+  const findProduct = (slug: string, nameNeedle: string) =>
+    catalogProducts.find(
+      (p) =>
+        p.slug === slug ||
+        p.name?.trim().toLowerCase().replace(/['’]/g, "").includes(nameNeedle)
+    );
 
   const featuredStory = DESIGN_STORIES[0];
   const heroProduct = products[0];
@@ -205,12 +209,12 @@ export default async function HomePage() {
           {
             label: "Shop Men",
             href: "/shop?category=men",
-            product: findByName("traits of man") ?? products[4],
+            product: findProduct("traits-of-man", "traits of man") ?? products[4],
           },
           {
             label: "Shop Women",
             href: "/shop?category=women",
-            product: findByName("womens blessings") ?? products[5],
+            product: findProduct("womens-blessings", "womens blessings") ?? products[5],
           },
         ].map((tile) => {
           const image = getProductImage(tile.product);
