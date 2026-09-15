@@ -4,8 +4,18 @@ import { getProductImage } from "@/lib/catalog/product-images";
 import type { WixProduct } from "@/types/wix";
 
 const TILES = [
-  { label: "Shop Men", sub: "New drops", href: "/shop?category=men" },
-  { label: "Shop Women", sub: "New drops", href: "/shop?category=women" },
+  {
+    label: "Shop Men",
+    sub: "New drops",
+    href: "/shop?category=men",
+    image: "/products/traits-of-man.jpg",
+  },
+  {
+    label: "Shop Women",
+    sub: "New drops",
+    href: "/shop?category=women",
+    image: "/products/womens-blessings.jpg",
+  },
   { label: "New Arrivals", sub: "Just landed", href: "/new-arrivals" },
 ];
 
@@ -13,7 +23,9 @@ export function PromoTiles({ products = [] }: { products?: WixProduct[] }) {
   return (
     <section className="container-content grid gap-4 py-10 sm:grid-cols-3">
       {TILES.map((tile, i) => {
-        const image = getProductImage(products[i]);
+        const image = tile.image
+          ? { url: tile.image, altText: tile.label }
+          : getProductImage(products[i]);
         return (
           <Link
             key={tile.href}

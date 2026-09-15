@@ -157,7 +157,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <ShopByMessage />
+      <ShopByMessage stories={DESIGN_STORIES} />
 
       {featuredStory && <FeaturedDesignStory story={featuredStory} />}
 
@@ -188,36 +188,6 @@ export default async function HomePage() {
             Explore the Stories
           </Link>
         </div>
-      </section>
-
-      <section className="container-content grid gap-6 py-12 sm:grid-cols-2">
-        {[
-          { label: "Shop Men", href: "/shop?category=men", product: products[4] },
-          { label: "Shop Women", href: "/shop?category=women", product: products[5] },
-        ].map((tile) => {
-          const image = getProductImage(tile.product);
-          return (
-            <Link key={tile.href} href={tile.href} className="group relative aspect-[3/4] overflow-hidden bg-canvas">
-              {image?.url && (
-                <>
-                  <Image
-                    src={image.url}
-                    alt={`${tile.label}, Christian apparel collection`}
-                    fill
-                    sizes="(min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/0 to-transparent" />
-                </>
-              )}
-              <span
-                className={`absolute bottom-6 left-6 font-display text-2xl ${image?.url ? "text-paper" : "text-ink"}`}
-              >
-                {tile.label}
-              </span>
-            </Link>
-          );
-        })}
       </section>
 
       <CommunityProof stories={[]} />
