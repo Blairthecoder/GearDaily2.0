@@ -145,7 +145,7 @@ export default async function ProductPage({
             <div className="mt-10 border-t border-line pt-8">
               <h2 className="font-display text-lg">Product Details</h2>
               <div
-                className="mt-2 text-ink/70"
+                className="rich-text mt-3"
                 // Wix product descriptions are rich text controlled by the store owner
                 dangerouslySetInnerHTML={{ __html: product.description }}
               />
@@ -157,7 +157,7 @@ export default async function ProductPage({
               <h2 className="font-display text-lg">{section.title}</h2>
               {section.description && (
                 <div
-                  className="mt-2 text-ink/70"
+                  className="rich-text mt-3"
                   dangerouslySetInnerHTML={{ __html: section.description }}
                 />
               )}
