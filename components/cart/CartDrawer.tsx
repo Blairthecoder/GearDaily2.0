@@ -6,19 +6,15 @@ import { useEffect, useState, useTransition } from "react";
 import { useCart } from "@/lib/cart-context";
 import {
   createCheckoutUrl,
-  getCurrentCart,
   removeLineItem,
   updateLineItemQuantity,
 } from "@/lib/wix/cart";
-
-type WixCart = Awaited<ReturnType<typeof getCurrentCart>>;
 
 /**
  * The compact cart shown after an item is added and from the header cart button.
  */
 export function CartDrawer() {
-  const { isDrawerOpen, closeDrawer, refreshCart } = useCart();
-  const [cart, setCart] = useState<WixCart>(null);
+  const { cart, isDrawerOpen, closeDrawer, refreshCart, replaceCart } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -29,10 +25,7 @@ export function CartDrawer() {
     let active = true;
     setLoading(true);
     setError(null);
-    getCurrentCart()
-      .then((currentCart) => {
-        if (active) setCart(currentCart);
-      })
+    refreshCart()
       .catch(() => {
         if (active) setError("We couldn't load your cart. Please try again.");
       })
@@ -43,7 +36,7 @@ export function CartDrawer() {
     return () => {
       active = false;
     };
-  }, [isDrawerOpen]);
+  }, [isDrawerOpen, refreshCart]);
 
   useEffect(() => {
     if (!isDrawerOpen) return;
@@ -61,18 +54,12 @@ export function CartDrawer() {
     };
   }, [closeDrawer, isDrawerOpen]);
 
-  async function syncCart() {
-    const updated = await getCurrentCart();
-    setCart(updated);
-    await refreshCart();
-  }
-
   function handleRemove(lineItemId: string) {
     setError(null);
     startTransition(async () => {
       try {
-        await removeLineItem(lineItemId);
-        await syncCart();
+        const result = await removeLineItem(lineItemId);
+        replaceCart(result.cart ?? null);
       } catch {
         setError("We couldn't remove that item. Please try again.");
       }
@@ -88,8 +75,8 @@ export function CartDrawer() {
     setError(null);
     startTransition(async () => {
       try {
-        await updateLineItemQuantity(lineItemId, quantity);
-        await syncCart();
+        const result = await updateLineItemQuantity(lineItemId, quantity);
+        replaceCart(result.cart ?? null);
       } catch {
         setError("We couldn't update that item. Please try again.");
       }

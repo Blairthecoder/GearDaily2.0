@@ -7,7 +7,7 @@ import { useCart } from "@/lib/cart-context";
 import type { WixProduct } from "@/types/wix";
 
 export function AddToCartForm({ product }: { product: WixProduct }) {
-  const { refreshCart, openDrawer } = useCart();
+  const { refreshCart, replaceCart, openDrawer } = useCart();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -25,12 +25,13 @@ export function AddToCartForm({ product }: { product: WixProduct }) {
     setError(null);
     startTransition(async () => {
       try {
-        await addToCart(
+        const result = await addToCart(
           product._id!,
           quantity,
           options.length > 0 ? selectedOptions : undefined
         );
-        await refreshCart();
+        if (result.cart) replaceCart(result.cart);
+        else await refreshCart();
         openDrawer();
       } catch {
         setError("Couldn't add this item to your cart. Please try again.");
