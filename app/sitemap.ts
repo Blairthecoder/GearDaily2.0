@@ -34,6 +34,10 @@ function priorityFor(route: string) {
   return SECTION_PRIORITY;
 }
 
+function changeFrequencyFor(route: string): NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]> {
+  return route === "" ? "daily" : "weekly";
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
@@ -55,7 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = STATIC_ROUTES.map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: now,
-    changeFrequency: (route === "" ? "daily" : "weekly") as const,
+    changeFrequency: changeFrequencyFor(route),
     priority: priorityFor(route),
   }));
   const collectionRoutes = SHOP_BY_MESSAGE.map((c) => ({
