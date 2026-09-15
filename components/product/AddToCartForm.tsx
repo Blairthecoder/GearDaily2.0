@@ -28,7 +28,8 @@ export function AddToCartForm({ product }: { product: WixProduct }) {
         const result = await addToCart(
           product._id!,
           quantity,
-          options.length > 0 ? selectedOptions : undefined
+          options.length > 0 ? selectedOptions : undefined,
+          product.manageVariants === true
         );
         if (result.cart) replaceCart(result.cart);
         else await refreshCart();

@@ -14,16 +14,41 @@ export async function getCurrentCart() {
 export async function addToCart(
   catalogItemId: string,
   quantity: number,
-  options?: Record<string, string>
+  selectedOptions?: Record<string, string>,
+  manageVariants = false
 ) {
   await ensureVisitorTokens();
+
+  let catalogOptions:
+    | { variantId: string }
+    | { options: Record<string, string> }
+    | undefined;
+
+  if (selectedOptions) {
+    if (manageVariants) {
+      const { variants } = await wixClient.products.queryProductVariants(catalogItemId, {
+        choices: selectedOptions,
+      });
+      const selectedVariant = variants?.find(
+        (variant) => variant.variant?.visible !== false && variant.stock?.inStock !== false
+      );
+
+      if (!selectedVariant?._id) {
+        throw new Error("The selected product variant is unavailable.");
+      }
+      catalogOptions = { variantId: selectedVariant._id };
+    } else {
+      catalogOptions = { options: selectedOptions };
+    }
+  }
+
   return wixClient.currentCart.addToCurrentCart({
     lineItems: [
       {
         catalogReference: {
           appId: "215238eb-22a5-4c36-9e7b-e7c08025e04e", // Wix Stores catalog app
           catalogItemId,
-          options: options ? { options } : undefined,
+          options: catalogOptions,
         },
         quantity,
       },
