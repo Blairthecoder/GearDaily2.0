@@ -51,17 +51,37 @@ export default async function ShopPage({
   }
 
   return (
-    <div className="container-content py-12">
+    <div className="container-content py-6 lg:py-12">
       <JsonLd data={collectionPageJsonLd("Shop G.E.A.R.", "/shop", filteredProducts)} />
       <JsonLd data={breadcrumbJsonLd([{ name: "Shop", url: "/shop" }])} />
       <p className="eyebrow">Our Collections</p>
-      <h1 className="font-display text-3xl">Shop Faith-Driven Apparel</h1>
-      <p className="mt-3 max-w-2xl text-ink/70">
+      <h1 className="font-display text-2xl lg:text-3xl">Shop Faith-Driven Apparel</h1>
+      <p className="mt-2 max-w-2xl text-sm text-ink/70 lg:mt-3 lg:text-base">
         Browse Scripture-rooted tops, hats, and bottoms created to carry meaning into everyday life.
       </p>
 
-      <div className="mt-8 grid gap-10 lg:grid-cols-[220px_1fr]">
-        <aside className="space-y-8">
+      <nav
+        aria-label="Category"
+        className="mt-5 -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:px-6 lg:hidden"
+      >
+        {PRODUCT_CATEGORIES.map((item) => (
+          <Link
+            key={item.value}
+            href={categoryHref(item.value)}
+            aria-current={category === item.value ? "page" : undefined}
+            className={
+              category === item.value
+                ? "flex-shrink-0 border border-gold bg-gold/10 px-4 py-2 text-sm font-semibold text-gold"
+                : "flex-shrink-0 border border-line px-4 py-2 text-sm text-ink/70"
+            }
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="mt-5 grid gap-10 lg:mt-8 lg:grid-cols-[220px_1fr]">
+        <aside className="hidden space-y-8 lg:block">
           <div>
             <p className="border-b border-line pb-3 text-sm font-semibold uppercase tracking-wide">
               Category
