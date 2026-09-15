@@ -32,20 +32,6 @@ export default async function HomePage() {
     products = [];
   }
 
-  let catalogProducts: WixProduct[] = products;
-  try {
-    catalogProducts = await getAllProducts(100);
-  } catch {
-    catalogProducts = products;
-  }
-
-  const findProduct = (slug: string, nameNeedle: string) =>
-    catalogProducts.find(
-      (p) =>
-        p.slug === slug ||
-        p.name?.trim().toLowerCase().replace(/['’]/g, "").includes(nameNeedle)
-    );
-
   const featuredStory = DESIGN_STORIES[0];
   const heroProduct = products[0];
   const heroImage = getProductImage(heroProduct);
@@ -209,32 +195,25 @@ export default async function HomePage() {
           {
             label: "Shop Men",
             href: "/shop?category=men",
-            product: findProduct("traits-of-man", "traits of man") ?? products[4],
+            image: "/products/traits-of-man.jpg",
           },
           {
             label: "Shop Women",
             href: "/shop?category=women",
-            product: findProduct("womens-blessings", "womens blessings") ?? products[5],
+            image: "/products/womens-blessings.jpg",
           },
         ].map((tile) => {
-          const image = getProductImage(tile.product);
           return (
             <Link key={tile.href} href={tile.href} className="group relative aspect-[3/4] overflow-hidden bg-canvas">
-              {image?.url && (
-                <>
-                  <Image
-                    src={image.url}
-                    alt={`${tile.label}, Christian apparel collection`}
-                    fill
-                    sizes="(min-width: 640px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/0 to-transparent" />
-                </>
-              )}
-              <span
-                className={`absolute bottom-6 left-6 font-display text-2xl ${image?.url ? "text-paper" : "text-ink"}`}
-              >
+              <Image
+                src={tile.image}
+                alt={`${tile.label}, Christian apparel collection`}
+                fill
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/0 to-transparent" />
+              <span className="absolute bottom-6 left-6 font-display text-2xl text-paper">
                 {tile.label}
               </span>
             </Link>
