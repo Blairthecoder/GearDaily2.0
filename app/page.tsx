@@ -7,6 +7,7 @@ import { ShopByMessage } from "@/components/content/ShopByMessage";
 import { FeaturedDesignStory } from "@/components/content/FeaturedDesignStory";
 import { EmailSignup } from "@/components/content/EmailSignup";
 import { PromoTiles } from "@/components/content/PromoTiles";
+import { CrestWatermark } from "@/components/content/CrestWatermark";
 import { FeatureStrip } from "@/components/content/FeatureStrip";
 import { CommunityProof } from "@/components/content/CommunityProof";
 import { RecentDesignStories } from "@/components/content/RecentDesignStories";
@@ -40,7 +41,9 @@ export default async function HomePage() {
       <JsonLd data={organizationJsonLd()} />
       <JsonLd data={websiteJsonLd()} />
 
-      <section className="container-content grid gap-8 py-10 lg:grid-cols-2 lg:items-start lg:py-16">
+      <section className="relative overflow-hidden">
+        <CrestWatermark className="pointer-events-none absolute -right-16 -top-10 h-[420px] w-[350px] text-ink/[0.04] lg:-right-10 lg:h-[560px] lg:w-[467px]" />
+        <div className="container-content relative grid gap-8 py-10 lg:grid-cols-2 lg:items-start lg:py-16">
         <div className="flex flex-col lg:pt-6">
           <p className="eyebrow">New Collection</p>
           <h1 className="mt-2 font-display text-4xl leading-tight lg:text-6xl">
@@ -93,6 +96,7 @@ export default async function HomePage() {
             </span>
           )}
         </Link>
+        </div>
       </section>
 
       <PromoTiles products={products.slice(1, 4)} />
