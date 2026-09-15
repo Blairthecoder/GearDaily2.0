@@ -149,3 +149,30 @@ export function getProductImage(
       }
     : null;
 }
+
+export function getProductImages(
+  product: WixProduct | null | undefined,
+): ResolvedProductImage[] {
+  if (!product) return [];
+
+  const images: ResolvedProductImage[] = [];
+  const seen = new Set<string>();
+  const wixItems = [product.media?.mainMedia, ...(product.media?.items ?? [])];
+
+  for (const item of wixItems) {
+    const image = item?.image;
+    if (!image?.url || seen.has(image.url)) continue;
+    seen.add(image.url);
+    images.push({
+      url: image.url,
+      altText: image.altText || product.name || "GearDaily product",
+    });
+  }
+
+  if (images.length === 0) {
+    const fallback = getProductImage(product);
+    if (fallback) images.push(fallback);
+  }
+
+  return images;
+}

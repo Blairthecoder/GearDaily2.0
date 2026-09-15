@@ -7,7 +7,8 @@ import { FeaturedDesignStory } from "@/components/content/FeaturedDesignStory";
 import { EmailSignup } from "@/components/content/EmailSignup";
 import { PromoTiles } from "@/components/content/PromoTiles";
 import { FeatureStrip } from "@/components/content/FeatureStrip";
-import { MiniColumns } from "@/components/content/MiniColumns";
+import { CommunityProof } from "@/components/content/CommunityProof";
+import { RecentDesignStories } from "@/components/content/RecentDesignStories";
 import { DESIGN_STORIES } from "@/lib/content/behind-the-design";
 import { getProductImage } from "@/lib/catalog/product-images";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -89,23 +90,6 @@ export default async function HomePage() {
 
       {featuredStory && <FeaturedDesignStory story={featuredStory} />}
 
-      <section className="border-y border-line bg-canvas py-16">
-        <div className="container-content max-w-2xl text-center">
-          <p className="eyebrow">G.E.A.R.ed 4 Gain</p>
-          <h2 className="mt-2 font-display text-2xl">Every Design Has a Message</h2>
-          <p className="mt-3 text-ink/70">
-            Every piece is built around Scripture, biblical character, and
-            spiritual growth — clothing meant to start conversations about
-            what you believe. A portion of what we do goes toward clothing
-            and supporting individuals experiencing homelessness, school-aged
-            children, and local communities.
-          </p>
-          <Link href="/geared-4-gain" className="btn-outline mt-6 inline-block">
-            Learn About Our Impact
-          </Link>
-        </div>
-      </section>
-
       <section className="container-content py-16">
         <div className="flex items-baseline justify-between">
           <div>
@@ -121,7 +105,21 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="container-content grid gap-6 pb-16 sm:grid-cols-2">
+      <section className="border-y border-line bg-canvas py-16">
+        <div className="container-content max-w-2xl text-center">
+          <p className="eyebrow">Wear What You Believe</p>
+          <h2 className="mt-2 font-display text-2xl">Every Design Has a Message</h2>
+          <p className="mt-3 text-ink/70">
+            Each piece begins with Scripture, faith, and spiritual growth—then
+            becomes a design made to encourage conversation and carry meaning.
+          </p>
+          <Link href="/behind-the-design" className="btn-outline mt-6 inline-block">
+            Explore the Stories
+          </Link>
+        </div>
+      </section>
+
+      <section className="container-content grid gap-6 py-16 sm:grid-cols-2">
         {[
           { label: "Shop Men", href: "/shop?category=men", product: products[4] },
           { label: "Shop Women", href: "/shop?category=women", product: products[5] },
@@ -151,9 +149,25 @@ export default async function HomePage() {
         })}
       </section>
 
-      <div className="border-t border-line">
-        <MiniColumns products={products} />
-      </div>
+      <CommunityProof stories={[]} />
+
+      <section className="bg-ink py-14 text-paper">
+        <div className="container-content flex flex-col justify-between gap-6 md:flex-row md:items-center">
+          <div className="max-w-2xl">
+            <p className="eyebrow">G.E.A.R.ed 4 Gain</p>
+            <h2 className="mt-2 font-display text-2xl">Apparel With Community Impact</h2>
+            <p className="mt-3 text-paper/70">
+              A portion of our work supports people experiencing homelessness,
+              school-aged children, and communities that need practical care.
+            </p>
+          </div>
+          <Link href="/geared-4-gain" className="btn-outline border-paper text-paper hover:bg-paper hover:text-ink">
+            Learn About Our Impact
+          </Link>
+        </div>
+      </section>
+
+      <RecentDesignStories stories={DESIGN_STORIES} />
 
       <EmailSignup />
     </>

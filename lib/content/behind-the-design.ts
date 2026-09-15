@@ -70,3 +70,7 @@ export const DESIGN_STORIES: DesignStory[] = [
 export function getDesignStoryBySlug(slug: string) {
   return DESIGN_STORIES.find((story) => story.slug === slug) ?? null;
 }
+
+export function getDesignStoryByProductSlug(slug: string | null | undefined) {
+  return DESIGN_STORIES.find((story) => story.productSlug === slug) ?? null;
+}

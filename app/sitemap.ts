@@ -3,7 +3,7 @@ import { SHOP_BY_MESSAGE } from "@/types/wix";
 import { DESIGN_STORIES } from "@/lib/content/behind-the-design";
 import { getAllProducts } from "@/lib/wix/products";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.URL ?? "http://localhost:3000";
 
 const STATIC_ROUTES = [
   "",

@@ -15,6 +15,14 @@ export default function ShippingReturnsPage() {
           Unworn, unwashed items may be returned within 30 days of delivery
           for a refund or exchange. Sale items are final sale.
         </p>
+        <section id="size-guide" className="border-t border-line pt-6">
+          <h2 className="font-display text-xl text-ink">Size Guide</h2>
+          <p className="mt-2">
+            Most apparel uses unisex sizing. Choose your usual size for a relaxed fit,
+            or size down for a closer fit. Product-specific size options appear on each
+            product page.
+          </p>
+        </section>
       </div>
     </div>
   );

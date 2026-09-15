@@ -20,7 +20,12 @@ export async function generateMetadata({
   return {
     title: story.title,
     description: story.summary,
+    alternates: { canonical: `/behind-the-design/${story.slug}` },
     openGraph: {
+      images: story.heroImage ? [story.heroImage] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
       images: story.heroImage ? [story.heroImage] : undefined,
     },
   };
@@ -34,6 +39,7 @@ export default async function DesignStoryPage({
   const { slug } = await params;
   const story = getDesignStoryBySlug(slug);
   if (!story) notFound();
+  const relatedStories = DESIGN_STORIES.filter((item) => item.slug !== story.slug).slice(0, 3);
 
   return (
     <div className="container-content max-w-3xl py-12">
@@ -44,6 +50,10 @@ export default async function DesignStoryPage({
           headline: story.title,
           description: story.summary,
           image: story.heroImage,
+          mainEntityOfPage: `/behind-the-design/${story.slug}`,
+          about: story.productSlug
+            ? { "@type": "Product", url: `/products/${story.productSlug}` }
+            : undefined,
         }}
       />
       <p className="text-sm font-semibold uppercase tracking-wide text-brass">
@@ -82,6 +92,24 @@ export default async function DesignStoryPage({
           Shop This Design
         </Link>
       )}
+
+      <section className="mt-16 border-t border-line pt-10">
+        <h2 className="font-display text-2xl">Related Design Stories</h2>
+        <div className="mt-6 grid gap-5 sm:grid-cols-3">
+          {relatedStories.map((item) => (
+            <Link
+              key={item.slug}
+              href={`/behind-the-design/${item.slug}`}
+              className="border border-line p-5 hover:border-gold"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wide text-gold">
+                {item.scriptureRef}
+              </p>
+              <h3 className="mt-2 font-display text-lg">{item.title}</h3>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

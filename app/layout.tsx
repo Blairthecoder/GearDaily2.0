@@ -18,7 +18,7 @@ const body = Inter({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? process.env.URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -28,6 +28,16 @@ export const metadata: Metadata = {
   },
   description:
     "Faith-driven apparel rooted in Scripture, designed to encourage, strengthen, and start conversations.",
+  openGraph: {
+    type: "website",
+    siteName: "G.E.A.R.",
+    title: "G.E.A.R. | Faith-Driven Christian Lifestyle Apparel",
+    description:
+      "Faith-driven apparel rooted in Scripture, designed to encourage, strengthen, and start conversations.",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
