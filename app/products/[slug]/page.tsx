@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getAllProducts, getProductBySlug } from "@/lib/wix/products";
 import { getDesignStoryByProductSlug } from "@/lib/content/behind-the-design";
 import { AddToCartForm } from "@/components/product/AddToCartForm";
+import { RichText } from "@/components/product/RichText";
 import { ProductGrid } from "@/components/collection/ProductGrid";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { productJsonLd, breadcrumbJsonLd } from "@/lib/seo/jsonld";
@@ -144,11 +145,7 @@ export default async function ProductPage({
           {product.description && (
             <div className="mt-10 border-t border-line pt-8">
               <h2 className="font-display text-lg">Product Details</h2>
-              <div
-                className="rich-text mt-3"
-                // Wix product descriptions are rich text controlled by the store owner
-                dangerouslySetInnerHTML={{ __html: product.description }}
-              />
+              <RichText html={product.description} className="rich-text mt-3" />
             </div>
           )}
 
@@ -156,10 +153,7 @@ export default async function ProductPage({
             <div key={section.title} className="mt-8 border-t border-line pt-6">
               <h2 className="font-display text-lg">{section.title}</h2>
               {section.description && (
-                <div
-                  className="rich-text mt-3"
-                  dangerouslySetInnerHTML={{ __html: section.description }}
-                />
+                <RichText html={section.description} className="rich-text mt-3" />
               )}
             </div>
           ))}

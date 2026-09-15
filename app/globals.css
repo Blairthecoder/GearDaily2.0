@@ -46,52 +46,11 @@ body {
   @apply text-xs font-semibold uppercase tracking-[0.2em] text-gold;
 }
 
-/* Rich text from Wix product descriptions / additional info sections */
+/* Parsed product descriptions (see components/product/RichText.tsx) */
 .rich-text {
   @apply text-ink/70;
 }
 
 .rich-text > * + * {
   @apply mt-4;
-}
-
-.rich-text p {
-  @apply leading-relaxed;
-}
-
-.rich-text ul,
-.rich-text ol {
-  @apply ml-5 space-y-2;
-}
-
-.rich-text ul {
-  @apply list-disc;
-}
-
-.rich-text ol {
-  @apply list-decimal;
-}
-
-.rich-text li {
-  @apply leading-relaxed pl-1;
-}
-
-.rich-text li > p {
-  @apply mt-0;
-}
-
-.rich-text strong,
-.rich-text b {
-  @apply font-semibold text-ink;
-}
-
-.rich-text a {
-  @apply underline underline-offset-2 hover:text-ink;
-}
-
-.rich-text h1,
-.rich-text h2,
-.rich-text h3,
-.rich-text h4 {
-  @apply font-display text-base font-semibold text-ink;
 }
