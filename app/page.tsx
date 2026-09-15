@@ -157,7 +157,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <ShopByMessage />
+      <ShopByMessage stories={DESIGN_STORIES} />
 
       {featuredStory && <FeaturedDesignStory story={featuredStory} />}
 
