@@ -99,6 +99,8 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <EmailSignup />
+
       <PromoTiles products={products.slice(1, 4)} />
 
       <FeatureStrip />
@@ -221,8 +223,6 @@ export default async function HomePage() {
       <CommunityProof stories={[]} />
 
       <RecentDesignStories stories={DESIGN_STORIES} />
-
-      <EmailSignup />
     </>
   );
 }

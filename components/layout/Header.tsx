@@ -9,6 +9,7 @@ const PRIMARY_NAV = [
   { label: "Shop", href: "/shop" },
   { label: "New Arrivals", href: "/new-arrivals" },
   { label: "Behind the Design", href: "/behind-the-design" },
+  { label: "Journal", href: "/journal" },
   { label: "Our Story", href: "/about" },
 ];
 
