@@ -42,9 +42,10 @@ export async function ensureVisitorTokens() {
 
   const tokens = await wixClient.auth.generateVisitorTokens();
   wixClient.auth.setTokens(tokens);
-  document.cookie = `${VISITOR_TOKENS_COOKIE}=${JSON.stringify(
-    tokens
-  )}; path=/; max-age=${60 * 60 * 24 * 30}; SameSite=Lax`;
+  const secure = window.location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `${VISITOR_TOKENS_COOKIE}=${encodeURIComponent(
+    JSON.stringify(tokens)
+  )}; path=/; max-age=${60 * 60 * 24 * 30}; SameSite=Lax${secure}`;
 }
 
 function readCookie(name: string): string | null {
