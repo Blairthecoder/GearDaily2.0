@@ -16,7 +16,7 @@ import type { WixProduct } from "@/types/wix";
 export const metadata: Metadata = {
   title: "Shop All",
   description:
-    "Browse the full G.E.A.R. collection — faith-driven apparel built around Scripture and meaning.",
+    "Browse the full G.E.A.R. collection, faith-driven apparel built around Scripture and meaning.",
   alternates: { canonical: "/shop" },
 };
 

@@ -19,7 +19,7 @@ import type { WixProduct } from "@/types/wix";
 export const metadata: Metadata = {
   title: "Christian T-Shirts & Faith-Based Apparel",
   description:
-    "Shop Christian t-shirts, hats, and lifestyle apparel rooted in Scripture — designed to encourage, strengthen, and start conversations.",
+    "Shop Christian t-shirts, hats, and lifestyle apparel rooted in Scripture, designed to encourage, strengthen, and start conversations.",
   alternates: { canonical: "/" },
 };
 
@@ -89,7 +89,7 @@ export default async function HomePage() {
         <div className="mt-8">
           <ProductGrid
             products={products}
-            emptyMessage="New arrivals are loading from Wix — connect your store to see live products here."
+            emptyMessage="New arrivals are loading from Wix. Connect your store to see live products here."
           />
         </div>
       </section>
@@ -118,7 +118,7 @@ export default async function HomePage() {
           <p className="eyebrow">Wear What You Believe</p>
           <h2 className="mt-2 font-display text-2xl">Every Design Has a Message</h2>
           <p className="mt-3 text-ink/70">
-            Each piece begins with Scripture, faith, and spiritual growth—then
+            Each piece begins with Scripture, faith, and spiritual growth, then
             becomes a design made to encourage conversation and carry meaning.
           </p>
           <Link href="/behind-the-design" className="btn-outline mt-6 inline-block">
@@ -139,7 +139,7 @@ export default async function HomePage() {
                 <>
                   <Image
                     src={image.url}
-                    alt={`${tile.label} — Christian apparel collection`}
+                    alt={`${tile.label}, Christian apparel collection`}
                     fill
                     sizes="(min-width: 640px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

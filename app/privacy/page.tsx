@@ -34,8 +34,8 @@ export default function PrivacyPage() {
         <section>
           <h2 className="font-display text-xl text-ink">Third-Party Services</h2>
           <p className="mt-2">
-            We use trusted third-party providers — including our e-commerce and
-            payment platform, and shipping carriers — to operate our store.
+            We use trusted third-party providers, including our e-commerce and
+            payment platform, and shipping carriers, to operate our store.
             These providers only receive the information necessary to perform
             their services and are bound by their own privacy and security
             obligations.

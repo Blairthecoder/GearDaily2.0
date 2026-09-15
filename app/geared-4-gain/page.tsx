@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "G.E.A.R.ed 4 Gain",
   description:
-    "G.E.A.R.'s community impact initiative — providing clothing and support to individuals experiencing homelessness, school-aged children, and local communities.",
+    "G.E.A.R.'s community impact initiative, providing clothing and support to individuals experiencing homelessness, school-aged children, and local communities.",
   alternates: { canonical: "/geared-4-gain" },
 };
 

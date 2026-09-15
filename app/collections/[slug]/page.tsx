@@ -21,7 +21,7 @@ export async function generateMetadata({
   if (!collection) return {};
   return {
     title: collection.label,
-    description: `Shop the ${collection.label} collection — faith-driven apparel built around this message.`,
+    description: `Shop the ${collection.label} collection, faith-driven apparel built around this message.`,
     alternates: { canonical: `/collections/${collection.slug}` },
   };
 }
@@ -56,7 +56,7 @@ export default async function CollectionPage({
       <p className="eyebrow">Shop by Message</p>
       <h1 className="font-display text-3xl">{collection.label}</h1>
       <p className="mt-3 max-w-2xl text-ink/70">
-        Apparel built around {collection.label.toLowerCase()} — Scripture-rooted
+        Apparel built around {collection.label.toLowerCase()}, Scripture-rooted
         designs made to wear the message every day.
       </p>
       <div className="mt-8">
