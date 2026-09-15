@@ -4,7 +4,8 @@ import { SHOP_BY_MESSAGE } from "@/types/wix";
 
 export const metadata: Metadata = {
   title: "Shop by Message",
-  description: "Find the message that speaks to where you are — strength, peace, freedom, trust, love, and identity.",
+  description: "Find the message that speaks to where you are: strength, peace, freedom, trust, love, and identity.",
+  alternates: { canonical: "/collections" },
 };
 
 export default function CollectionsIndexPage() {

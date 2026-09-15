@@ -6,6 +6,7 @@ import type { WixProduct } from "@/types/wix";
 export const metadata: Metadata = {
   title: "Best Sellers",
   description: "The most-loved designs from G.E.A.R.",
+  alternates: { canonical: "/best-sellers" },
 };
 
 export default async function BestSellersPage() {

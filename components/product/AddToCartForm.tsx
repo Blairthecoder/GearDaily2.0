@@ -92,7 +92,7 @@ export function AddToCartForm({ product }: { product: WixProduct }) {
                     disabled={choice.inStock === false}
                   >
                     {choice.description ?? choice.value}
-                    {choice.inStock === false ? " — unavailable" : ""}
+                    {choice.inStock === false ? " (unavailable)" : ""}
                   </option>
                 ))}
             </select>

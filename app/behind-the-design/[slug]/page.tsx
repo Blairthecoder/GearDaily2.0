@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DESIGN_STORIES, getDesignStoryBySlug } from "@/lib/content/behind-the-design";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo/jsonld";
 
 export function generateStaticParams() {
   return DESIGN_STORIES.map((story) => ({ slug: story.slug }));
@@ -56,6 +57,12 @@ export default async function DesignStoryPage({
             : undefined,
         }}
       />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Behind the Design", url: "/behind-the-design" },
+          { name: story.title, url: `/behind-the-design/${story.slug}` },
+        ])}
+      />
       <p className="text-sm font-semibold uppercase tracking-wide text-brass">
         {story.scriptureRef}
       </p>
@@ -73,15 +80,37 @@ export default async function DesignStoryPage({
         )}
       </div>
 
-      <div className="mt-8 space-y-8">
-        <div>
-          <h2 className="font-display text-xl">The Meaning</h2>
-          <p className="mt-2 text-ink/70">{story.meaning}</p>
-        </div>
-        <div>
-          <h2 className="font-display text-xl">Design Symbolism</h2>
-          <p className="mt-2 text-ink/70">{story.symbolism}</p>
-        </div>
+      <div className="mt-8 space-y-10">
+        {story.sections && story.sections.length > 0 ? (
+          story.sections.map((section) => (
+            <div key={section.heading}>
+              <h2 className="font-display text-xl">{section.heading}</h2>
+              <div className="mt-2 space-y-4 text-ink/70">
+                {section.body.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+              {section.list && (
+                <ul className="mt-4 list-disc space-y-2 pl-5 text-ink/70">
+                  {section.list.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        ) : (
+          <>
+            <div>
+              <h2 className="font-display text-xl">The Meaning</h2>
+              <p className="mt-2 text-ink/70">{story.meaning}</p>
+            </div>
+            <div>
+              <h2 className="font-display text-xl">Design Symbolism</h2>
+              <p className="mt-2 text-ink/70">{story.symbolism}</p>
+            </div>
+          </>
+        )}
       </div>
 
       {story.productSlug && (

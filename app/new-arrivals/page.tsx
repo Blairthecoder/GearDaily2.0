@@ -6,6 +6,7 @@ import type { WixProduct } from "@/types/wix";
 export const metadata: Metadata = {
   title: "New Arrivals",
   description: "The newest faith-driven designs from G.E.A.R.",
+  alternates: { canonical: "/new-arrivals" },
 };
 
 export default async function NewArrivalsPage() {
