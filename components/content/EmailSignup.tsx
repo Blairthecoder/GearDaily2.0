@@ -62,7 +62,7 @@ export function EmailSignup({
               You&apos;re in! Check your inbox soon.
             </p>
           ) : (
-            <form onSubmit={handleSubmit} className="flex w-full max-w-md gap-2">
+            <form onSubmit={handleSubmit} className="flex w-full max-w-md flex-col gap-2 sm:flex-row">
               <label htmlFor="email-signup" className="sr-only">
                 Email address
               </label>
@@ -70,11 +70,13 @@ export function EmailSignup({
                 id="email-signup"
                 type="email"
                 required
+                inputMode="email"
+                autoComplete="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="Enter your email"
                 disabled={status === "submitting"}
-                className="w-full border border-paper/30 bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink/40 disabled:opacity-60"
+                className="w-full border border-paper/30 bg-paper px-4 py-3 text-base text-ink placeholder:text-ink/40 disabled:opacity-60 sm:text-sm"
               />
               <button
                 type="submit"
