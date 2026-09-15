@@ -80,15 +80,37 @@ export default async function DesignStoryPage({
         )}
       </div>
 
-      <div className="mt-8 space-y-8">
-        <div>
-          <h2 className="font-display text-xl">The Meaning</h2>
-          <p className="mt-2 text-ink/70">{story.meaning}</p>
-        </div>
-        <div>
-          <h2 className="font-display text-xl">Design Symbolism</h2>
-          <p className="mt-2 text-ink/70">{story.symbolism}</p>
-        </div>
+      <div className="mt-8 space-y-10">
+        {story.sections && story.sections.length > 0 ? (
+          story.sections.map((section) => (
+            <div key={section.heading}>
+              <h2 className="font-display text-xl">{section.heading}</h2>
+              <div className="mt-2 space-y-4 text-ink/70">
+                {section.body.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+              {section.list && (
+                <ul className="mt-4 list-disc space-y-2 pl-5 text-ink/70">
+                  {section.list.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        ) : (
+          <>
+            <div>
+              <h2 className="font-display text-xl">The Meaning</h2>
+              <p className="mt-2 text-ink/70">{story.meaning}</p>
+            </div>
+            <div>
+              <h2 className="font-display text-xl">Design Symbolism</h2>
+              <p className="mt-2 text-ink/70">{story.symbolism}</p>
+            </div>
+          </>
+        )}
       </div>
 
       {story.productSlug && (
