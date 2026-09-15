@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Behind the Design",
   description:
     "The Scripture, symbolism, and story behind every G.E.A.R. design.",
+  alternates: { canonical: "/behind-the-design" },
 };
 
 export default function BehindTheDesignIndex() {

@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Shipping & Returns" };
+export const metadata: Metadata = {
+  title: "Shipping & Returns",
+  description:
+    "Shipping timelines, return policy, and size guide for G.E.A.R. orders.",
+  alternates: { canonical: "/shipping-returns" },
+};
 
 export default function ShippingReturnsPage() {
   return (

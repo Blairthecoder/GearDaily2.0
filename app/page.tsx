@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllProducts } from "@/lib/wix/products";
@@ -14,6 +15,13 @@ import { getProductImage } from "@/lib/catalog/product-images";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/jsonld";
 import type { WixProduct } from "@/types/wix";
+
+export const metadata: Metadata = {
+  title: "Christian T-Shirts & Faith-Based Apparel",
+  description:
+    "Shop Christian t-shirts, hats, and lifestyle apparel rooted in Scripture — designed to encourage, strengthen, and start conversations.",
+  alternates: { canonical: "/" },
+};
 
 export default async function HomePage() {
   let products: WixProduct[] = [];
@@ -131,7 +139,7 @@ export default async function HomePage() {
                 <>
                   <Image
                     src={image.url}
-                    alt=""
+                    alt={`${tile.label} — Christian apparel collection`}
                     fill
                     sizes="(min-width: 640px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

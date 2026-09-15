@@ -10,7 +10,7 @@ import {
   queryProducts,
 } from "@/lib/catalog/product-categories";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { collectionPageJsonLd } from "@/lib/seo/jsonld";
+import { breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo/jsonld";
 import type { WixProduct } from "@/types/wix";
 
 export const metadata: Metadata = {
@@ -53,6 +53,7 @@ export default async function ShopPage({
   return (
     <div className="container-content py-12">
       <JsonLd data={collectionPageJsonLd("Shop G.E.A.R.", "/shop", filteredProducts)} />
+      <JsonLd data={breadcrumbJsonLd([{ name: "Shop", url: "/shop" }])} />
       <p className="eyebrow">Our Collections</p>
       <h1 className="font-display text-3xl">Shop Faith-Driven Apparel</h1>
       <p className="mt-3 max-w-2xl text-ink/70">

@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
 
-export const metadata: Metadata = { title: "FAQ" };
+export const metadata: Metadata = {
+  title: "FAQ",
+  description:
+    "Answers on sizing, shipping times, and returns for G.E.A.R. faith-driven apparel.",
+  alternates: { canonical: "/faq" },
+};
 
 const FAQS = [
   {

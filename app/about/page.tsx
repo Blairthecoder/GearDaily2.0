@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Our Story",
   description:
     "G.E.A.R. — Get Edified And Refreshed. Faith-driven apparel rooted in Scripture, designed to encourage and start conversations.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

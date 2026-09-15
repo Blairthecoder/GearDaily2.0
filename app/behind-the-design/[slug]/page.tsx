@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DESIGN_STORIES, getDesignStoryBySlug } from "@/lib/content/behind-the-design";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo/jsonld";
 
 export function generateStaticParams() {
   return DESIGN_STORIES.map((story) => ({ slug: story.slug }));
@@ -55,6 +56,12 @@ export default async function DesignStoryPage({
             ? { "@type": "Product", url: `/products/${story.productSlug}` }
             : undefined,
         }}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Behind the Design", url: "/behind-the-design" },
+          { name: story.title, url: `/behind-the-design/${story.slug}` },
+        ])}
       />
       <p className="text-sm font-semibold uppercase tracking-wide text-brass">
         {story.scriptureRef}

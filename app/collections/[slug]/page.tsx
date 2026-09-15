@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getProductsByCollection } from "@/lib/wix/products";
 import { ProductGrid } from "@/components/collection/ProductGrid";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd, collectionPageJsonLd } from "@/lib/seo/jsonld";
 import { SHOP_BY_MESSAGE } from "@/types/wix";
 import type { WixProduct } from "@/types/wix";
 
@@ -19,7 +21,8 @@ export async function generateMetadata({
   if (!collection) return {};
   return {
     title: collection.label,
-    description: `Shop the ${collection.label} collection — apparel built around this message.`,
+    description: `Shop the ${collection.label} collection — faith-driven apparel built around this message.`,
+    alternates: { canonical: `/collections/${collection.slug}` },
   };
 }
 
@@ -41,7 +44,21 @@ export default async function CollectionPage({
 
   return (
     <div className="container-content py-12">
+      <JsonLd
+        data={collectionPageJsonLd(collection.label, `/collections/${collection.slug}`, products)}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Shop by Message", url: "/collections" },
+          { name: collection.label, url: `/collections/${collection.slug}` },
+        ])}
+      />
+      <p className="eyebrow">Shop by Message</p>
       <h1 className="font-display text-3xl">{collection.label}</h1>
+      <p className="mt-3 max-w-2xl text-ink/70">
+        Apparel built around {collection.label.toLowerCase()} — Scripture-rooted
+        designs made to wear the message every day.
+      </p>
       <div className="mt-8">
         <ProductGrid
           products={products}
