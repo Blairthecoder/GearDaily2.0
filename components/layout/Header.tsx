@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/lib/cart-context";
@@ -51,13 +52,14 @@ export function Header() {
           </button>
 
           <Link href="/" className="flex flex-col items-center leading-none">
-            <span className="font-display text-2xl tracking-wide">
-              G<sup className="text-[0.5em] text-gold">7</sup>
-              <span className="text-gold">.</span>E<sup className="text-[0.5em] text-gold">5</sup>
-              <span className="text-gold">.</span>A<sup className="text-[0.5em] text-gold">1</sup>
-              <span className="text-gold">.</span>R<sup className="text-[0.5em] text-gold">18</sup>
-              <span className="text-gold">.</span>
-            </span>
+            <Image
+              src="/brand/logo.png"
+              alt="G.E.A.R."
+              width={1695}
+              height={574}
+              priority
+              className="h-8 w-auto lg:h-10"
+            />
             <span className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.15em] text-ink/50">
               Get Edified And Refreshed
             </span>
