@@ -34,6 +34,11 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
 
 const PAYMENT_METHODS = ["Visa", "Mastercard", "Amex", "Discover"];
 
+const SOCIAL_LINKS = [
+  { label: "Instagram", href: "https://www.instagram.com/geardailyr122/", icon: InstagramIcon },
+  { label: "Facebook", href: "https://www.facebook.com/geardaily", icon: FacebookIcon },
+];
+
 export async function Footer() {
   let products: WixProduct[] = [];
   try {
@@ -74,6 +79,20 @@ export async function Footer() {
             Get Edified And Refreshed. Faith-driven apparel rooted in Scripture,
             designed to encourage, strengthen, and start conversations.
           </p>
+          <div className="mt-4 flex gap-4">
+            {SOCIAL_LINKS.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="text-paper/70 transition-colors hover:text-gold"
+              >
+                <social.icon className="h-5 w-5" />
+              </a>
+            ))}
+          </div>
         </div>
         {COLUMNS.map((col) => (
           <div key={col.title}>
@@ -112,5 +131,28 @@ export async function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M15 8.5h1.5V5.5H15c-1.9 0-3.5 1.6-3.5 3.5v1.5H9.5V13H11.5v7H14.5v-7h1.9l.4-2.5H14.5V9.2c0-.5.3-.7.5-.7Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

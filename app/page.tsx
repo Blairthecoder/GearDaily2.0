@@ -39,7 +39,7 @@ export default async function HomePage() {
       <JsonLd data={organizationJsonLd()} />
       <JsonLd data={websiteJsonLd()} />
 
-      <section className="container-content grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:py-24">
+      <section className="container-content grid gap-8 py-10 lg:grid-cols-2 lg:items-center lg:py-16">
         <div>
           <p className="eyebrow">New Collection</p>
           <h1 className="mt-2 font-display text-4xl leading-tight lg:text-6xl">
@@ -76,7 +76,41 @@ export default async function HomePage() {
 
       <FeatureStrip />
 
-      <section className="container-content py-16">
+      <section className="bg-ink py-16 text-paper">
+        <div className="container-content">
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-2xl">
+              <p className="eyebrow">G.E.A.R.ed 4 Gain</p>
+              <h2 className="mt-2 font-display text-3xl">Every Order Gives Back</h2>
+              <p className="mt-3 text-paper/70">
+                A portion of every purchase supports people experiencing
+                homelessness, school-aged children, and communities that need
+                practical care. Wearing G.E.A.R. means your closet is doing
+                something.
+              </p>
+            </div>
+            <Link href="/geared-4-gain" className="btn-outline flex-shrink-0 border-paper text-paper hover:bg-paper hover:text-ink">
+              Learn About Our Impact
+            </Link>
+          </div>
+          <dl className="mt-10 grid gap-6 border-t border-paper/20 pt-8 sm:grid-cols-3">
+            <div>
+              <dt className="font-display text-3xl text-gold">Homelessness</dt>
+              <dd className="mt-1 text-sm text-paper/60">Clothing and practical support</dd>
+            </div>
+            <div>
+              <dt className="font-display text-3xl text-gold">Youth</dt>
+              <dd className="mt-1 text-sm text-paper/60">Support for school-aged children</dd>
+            </div>
+            <div>
+              <dt className="font-display text-3xl text-gold">Community</dt>
+              <dd className="mt-1 text-sm text-paper/60">Care where it&apos;s needed most</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section className="container-content py-12">
         <div className="flex items-baseline justify-between">
           <div>
             <p className="eyebrow">Just Landed</p>
@@ -98,7 +132,7 @@ export default async function HomePage() {
 
       {featuredStory && <FeaturedDesignStory story={featuredStory} />}
 
-      <section className="container-content py-16">
+      <section className="container-content py-12">
         <div className="flex items-baseline justify-between">
           <div>
             <p className="eyebrow">Fan Favorites</p>
@@ -113,7 +147,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-canvas py-16">
+      <section className="border-y border-line bg-canvas py-12">
         <div className="container-content max-w-2xl text-center">
           <p className="eyebrow">Wear What You Believe</p>
           <h2 className="mt-2 font-display text-2xl">Every Design Has a Message</h2>
@@ -127,7 +161,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="container-content grid gap-6 py-16 sm:grid-cols-2">
+      <section className="container-content grid gap-6 py-12 sm:grid-cols-2">
         {[
           { label: "Shop Men", href: "/shop?category=men", product: products[4] },
           { label: "Shop Women", href: "/shop?category=women", product: products[5] },
@@ -158,22 +192,6 @@ export default async function HomePage() {
       </section>
 
       <CommunityProof stories={[]} />
-
-      <section className="bg-ink py-14 text-paper">
-        <div className="container-content flex flex-col justify-between gap-6 md:flex-row md:items-center">
-          <div className="max-w-2xl">
-            <p className="eyebrow">G.E.A.R.ed 4 Gain</p>
-            <h2 className="mt-2 font-display text-2xl">Apparel With Community Impact</h2>
-            <p className="mt-3 text-paper/70">
-              A portion of our work supports people experiencing homelessness,
-              school-aged children, and communities that need practical care.
-            </p>
-          </div>
-          <Link href="/geared-4-gain" className="btn-outline border-paper text-paper hover:bg-paper hover:text-ink">
-            Learn About Our Impact
-          </Link>
-        </div>
-      </section>
 
       <RecentDesignStories stories={DESIGN_STORIES} />
 

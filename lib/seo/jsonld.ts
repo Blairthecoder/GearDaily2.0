@@ -17,6 +17,10 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: "GearDaily",
     url: siteUrl,
+    sameAs: [
+      "https://www.instagram.com/geardailyr122/",
+      "https://www.facebook.com/geardaily",
+    ],
   };
 }
 
