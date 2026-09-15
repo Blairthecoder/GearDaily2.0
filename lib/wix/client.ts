@@ -2,6 +2,7 @@ import { createClient, OAuthStrategy } from "@wix/sdk";
 import { products, collections } from "@wix/stores";
 import { cart, checkout, currentCart } from "@wix/ecom";
 import { redirects } from "@wix/redirects";
+import { submittedContact } from "@wix/crm";
 
 const clientId = process.env.NEXT_PUBLIC_WIX_CLIENT_ID;
 
@@ -16,7 +17,7 @@ if (!clientId) {
  * Visitor auth only — never import the client secret here or on the client.
  */
 export const wixClient = createClient({
-  modules: { products, collections, cart, checkout, currentCart, redirects },
+  modules: { products, collections, cart, checkout, currentCart, redirects, submittedContact },
   auth: OAuthStrategy({ clientId }),
 });
 

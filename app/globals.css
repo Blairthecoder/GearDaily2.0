@@ -45,3 +45,12 @@ body {
 .eyebrow {
   @apply text-xs font-semibold uppercase tracking-[0.2em] text-gold;
 }
+
+/* Parsed product descriptions (see components/product/RichText.tsx) */
+.rich-text {
+  @apply text-ink/70;
+}
+
+.rich-text > * + * {
+  @apply mt-4;
+}
