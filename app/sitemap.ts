@@ -12,6 +12,7 @@ const STATIC_ROUTES = [
   "/best-sellers",
   "/collections",
   "/behind-the-design",
+  "/journal",
   "/about",
   "/geared-4-gain",
   "/faq",
