@@ -22,6 +22,22 @@ export function AddToCartForm({ product }: { product: WixProduct }) {
 
   function handleAddToCart() {
     if (!product._id) return;
+    const selectedVariant = product.manageVariants
+      ? product.variants?.find(
+          (variant) =>
+            Object.entries(selectedOptions).every(
+              ([name, value]) => variant.choices?.[name] === value
+            ) &&
+            variant.variant?.visible !== false &&
+            variant.stock?.inStock !== false
+        )
+      : undefined;
+
+    if (product.manageVariants && !selectedVariant?._id) {
+      setError("That option combination is unavailable. Please choose another.");
+      return;
+    }
+
     setError(null);
     startTransition(async () => {
       try {
@@ -29,7 +45,7 @@ export function AddToCartForm({ product }: { product: WixProduct }) {
           product._id!,
           quantity,
           options.length > 0 ? selectedOptions : undefined,
-          product.manageVariants === true
+          selectedVariant?._id
         );
         if (result.cart) replaceCart(result.cart);
         else await refreshCart();

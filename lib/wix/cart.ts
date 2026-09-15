@@ -15,32 +15,14 @@ export async function addToCart(
   catalogItemId: string,
   quantity: number,
   selectedOptions?: Record<string, string>,
-  manageVariants = false
+  variantId?: string
 ) {
   await ensureVisitorTokens();
-
-  let catalogOptions:
-    | { variantId: string }
-    | { options: Record<string, string> }
-    | undefined;
-
-  if (selectedOptions) {
-    if (manageVariants) {
-      const { variants } = await wixClient.products.queryProductVariants(catalogItemId, {
-        choices: selectedOptions,
-      });
-      const selectedVariant = variants?.find(
-        (variant) => variant.variant?.visible !== false && variant.stock?.inStock !== false
-      );
-
-      if (!selectedVariant?._id) {
-        throw new Error("The selected product variant is unavailable.");
-      }
-      catalogOptions = { variantId: selectedVariant._id };
-    } else {
-      catalogOptions = { options: selectedOptions };
-    }
-  }
+  const catalogOptions = variantId
+    ? { variantId }
+    : selectedOptions
+      ? { options: selectedOptions }
+      : undefined;
 
   return wixClient.currentCart.addToCurrentCart({
     lineItems: [

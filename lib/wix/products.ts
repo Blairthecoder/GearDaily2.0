@@ -28,7 +28,13 @@ export async function getProductBySlug(slug: string) {
     .eq("slug", slug)
     .limit(1)
     .find();
-  return items[0] ?? null;
+  const summary = items[0];
+  if (!summary?._id) return null;
+
+  // Query results omit the variants array. The product detail request includes
+  // it so the client can submit Wix's required variantId when adding to cart.
+  const { product } = await wixClient.products.getProduct(summary._id);
+  return product ?? summary;
 }
 
 export async function getCollections() {
