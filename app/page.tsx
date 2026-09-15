@@ -7,6 +7,7 @@ import { ShopByMessage } from "@/components/content/ShopByMessage";
 import { FeaturedDesignStory } from "@/components/content/FeaturedDesignStory";
 import { EmailSignup } from "@/components/content/EmailSignup";
 import { PromoTiles } from "@/components/content/PromoTiles";
+import { CrestWatermark } from "@/components/content/CrestWatermark";
 import { FeatureStrip } from "@/components/content/FeatureStrip";
 import { CommunityProof } from "@/components/content/CommunityProof";
 import { RecentDesignStories } from "@/components/content/RecentDesignStories";
@@ -32,15 +33,18 @@ export default async function HomePage() {
   }
 
   const featuredStory = DESIGN_STORIES[0];
-  const heroImage = getProductImage(products[0]);
+  const heroProduct = products[0];
+  const heroImage = getProductImage(heroProduct);
 
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
       <JsonLd data={websiteJsonLd()} />
 
-      <section className="container-content grid gap-8 py-10 lg:grid-cols-2 lg:items-center lg:py-16">
-        <div>
+      <section className="relative overflow-hidden">
+        <CrestWatermark className="pointer-events-none absolute -right-16 -top-10 h-[420px] w-[350px] text-ink/[0.04] lg:-right-10 lg:h-[560px] lg:w-[467px]" />
+        <div className="container-content relative grid gap-8 py-10 lg:grid-cols-2 lg:items-start lg:py-16">
+        <div className="flex flex-col lg:pt-6">
           <p className="eyebrow">New Collection</p>
           <h1 className="mt-2 font-display text-4xl leading-tight lg:text-6xl">
             Faith, Worn Daily.
@@ -57,8 +61,25 @@ export default async function HomePage() {
               Discover G.E.A.R.
             </Link>
           </div>
+          <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-line pt-6 max-w-md">
+            <div>
+              <dt className="font-display text-lg">Free Shipping</dt>
+              <dd className="mt-1 text-xs text-ink/60">On U.S. orders $75+</dd>
+            </div>
+            <div>
+              <dt className="font-display text-lg">30 Days</dt>
+              <dd className="mt-1 text-xs text-ink/60">Easy returns</dd>
+            </div>
+            <div>
+              <dt className="font-display text-lg">Gives Back</dt>
+              <dd className="mt-1 text-xs text-ink/60">Every order</dd>
+            </div>
+          </dl>
         </div>
-        <div className="relative aspect-[4/5] bg-canvas">
+        <Link
+          href={heroProduct?.slug ? `/products/${heroProduct.slug}` : "/shop"}
+          className="group relative block aspect-[4/5] overflow-hidden bg-canvas"
+        >
           {heroImage && (
             <Image
               src={heroImage.url}
@@ -66,9 +87,15 @@ export default async function HomePage() {
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
               priority
-              className="object-cover"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
           )}
+          {heroProduct && (
+            <span className="absolute bottom-4 left-4 bg-paper px-3 py-2 text-xs font-semibold uppercase tracking-wide text-ink">
+              Shop {heroProduct.name}
+            </span>
+          )}
+        </Link>
         </div>
       </section>
 
