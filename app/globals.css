@@ -38,6 +38,10 @@ body {
   @apply absolute left-3 top-3 z-10 bg-rust px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-paper;
 }
 
+.badge-ribbon {
+  @apply absolute right-3 top-3 z-10 bg-ink px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-paper;
+}
+
 .eyebrow {
   @apply text-xs font-semibold uppercase tracking-[0.2em] text-gold;
 }
